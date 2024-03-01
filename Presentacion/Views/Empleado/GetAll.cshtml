@@ -1,0 +1,44 @@
+﻿@model Negocio.Empleado
+@{
+    ViewBag.Title = "GetAll";
+}
+
+<h2>Empleados</h2>
+<a href="@Url.Action("Formulario","Empleado")" class="btn btn-outline-success">Agregar</a>
+
+
+@using (Html.BeginForm("GetAll", "Formulario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <table class="table table table-hover">
+        <thead class="table-secondary">
+            <tr class="text-center">
+
+                
+                <th>Id Empleado</th>
+                <th>Nombre</th>
+                <th>Departamento </th>
+                <th>Puesto </th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Negocio.Empleado empleado in Model.Empleados)
+            {
+                <tr>
+                    <td>@empleado.EmpleadoID </td>
+                    <td>@empleado.Nombre </td>
+                    <td>@empleado.departamento.DepartamentoDescripcion </td>
+                    <td>@empleado.puesto.PuestoDescripcion </td>
+                    
+                    <td><a href="@Url.Action("Delete", "Empleado", new { IDEmpleado = empleado.EmpleadoID })" class="btn btn-outline-danger">Eliminar</a></td>
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
